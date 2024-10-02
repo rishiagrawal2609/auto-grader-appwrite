@@ -2,25 +2,39 @@
 
 import { useEffect, useState } from "react"
 import {client,account,ID} from './appwrite'
+
 export default function Home() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [user,setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true)
+  const [loadingUser, setLoadingUser] = useState(false)
+  
   useEffect(()=>{
       async function getUser(){
-        setUser(await account.get())
-        setLoadingUser(false)
+        console.log("Handle getUser");
+        try {
+          console.log(await account.get())
+          setUser(await account.get())
+          setLoadingUser(false)
+        } catch (error) {
+          console.error(error.message );
+        }
       }
-      getUser();   
-  },[])
+
+      if(user!=null){
+        getUser(); 
+      }  
+  },[user ? user.email : user])
 
   async function handleLogin(){
+    console.log("Handle login");
+    
     try{
       await account.createEmailPasswordSession(email,password);
       setUser(await account.get())
       setEmail('');
       setPassword('');
+      setLoadingUser(true);
     }catch(e){
       console.error(e);
     }
