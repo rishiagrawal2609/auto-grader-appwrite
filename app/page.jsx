@@ -72,7 +72,7 @@ export default function Home() {
       You are already logged in
       </h2>
       <p className="text-gray-700 dark:text-gray-300">
-      It seems you're already logged into your account. Feel free to navigate around or log out if you want to switch users.
+      It seems you are already logged into your account. Feel free to navigate around or log out if you want to switch users.
       </p>
       <button
       className="mt-6 w-full p-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition duration-300"
